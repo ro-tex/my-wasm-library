@@ -1,0 +1,22 @@
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+</head>
+<body>
+<div id="wasm_target"></div>
+<!-- Include our glue code -->
+<script src='./pkg/my_wasm_library.js'></script>
+<!-- Include our glue code -->
+<script>
+    window.addEventListener('load', async () => {
+        // Load the wasm file
+        await wasm_bindgen('./pkg/my_wasm_library_bg.wasm');
+        // Once it's loaded the `wasm_bindgen` object is populated
+        // with the functions defined in our Rust code
+        const greeting = wasm_bindgen.excited_greeting("Ryan");
+        document.getElementById('wasm_target').textContent = greeting;
+        console.log(greeting)
+    });
+</script>
+</body>
+</html>
